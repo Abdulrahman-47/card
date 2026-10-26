@@ -38,14 +38,21 @@
   let busy = false;
   let queue = [];
   let drag = null;
+  let activeLeaf = null; // the leaf currently turning
   let opened = false;    // has the reader turned a page yet?
 
   const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
   const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const easeIn = (t) => t * t;
+  const easeOut = (t) => 1 - (1 - t) * (1 - t);
 
   /* ---------------------------------------------------------------- layout */
 
   const maxFlipped = () => (mode === 'spread' ? leaves.length : leaves.length - 1);
+
+  // Where a turned leaf rests. On a phone there is no left page to land on, so
+  // the page keeps going round the spine and folds away behind the book.
+  const turnedAngle = () => (mode === 'single' ? -360 : -180);
 
   function visiblePages(f = flipped) {
     if (mode === 'single') return [f];
@@ -92,7 +99,7 @@
     });
 
     flipped = clamp(stateForPage(anchor), 0, maxFlipped());
-    leaves.forEach((l, i) => setAngle(l, i < flipped ? -180 : 0));
+    leaves.forEach((l, i) => setAngle(l, i < flipped ? turnedAngle() : 0));
     restack();
     renderDots();
     updateUI(flipped, false);
@@ -133,10 +140,16 @@
 
   /* ---------------------------------------------------------------- drawing */
 
+  // Past 180° a page is behind the book, so it has to drop below the others.
+  const activeZ = (leaf) => (leaf.angle < -180 ? 0 : leaves.length + 2);
+
   function setAngle(leaf, angle) {
     leaf.angle = angle;
     leaf.el.style.transform = `rotateY(${angle}deg)`;
-    const t = Math.abs(angle) / 180;
+    if (leaf === activeLeaf) leaf.el.style.zIndex = String(activeZ(leaf));
+    let deg = Math.abs(angle) % 360;
+    if (deg > 180) deg = 360 - deg; // the far half of a full turn mirrors the near half
+    const t = deg / 180;
     const lift = Math.sin(t * Math.PI);
     leaf.front.style.setProperty('--shade', t < 0.5 ? (lift * 0.5).toFixed(3) : '0');
     leaf.back.style.setProperty('--shade', t >= 0.5 ? (lift * 0.5).toFixed(3) : '0');
@@ -144,7 +157,7 @@
 
   // Shadow the turning page throws onto the pages underneath it.
   function castShadow(leaf) {
-    if (!leaf) {
+    if (!leaf || leaf.angle < -180) {
       castLeft.style.opacity = castRight.style.opacity = '0';
       return;
     }
@@ -155,9 +168,10 @@
 
   function restack(active = null) {
     const n = leaves.length;
+    activeLeaf = active;
     castLeft.style.zIndex = castRight.style.zIndex = String(n + 1);
     leaves.forEach((l, i) => {
-      l.el.style.zIndex = String(l === active ? n + 2 : i < flipped ? i + 1 : n - i);
+      l.el.style.zIndex = String(l === active ? activeZ(l) : i < flipped ? i + 1 : n - i);
       let show;
       if (l === active) show = true;
       else if (mode === 'single') show = i >= flipped && i <= flipped + 1;
@@ -178,12 +192,16 @@
       shiftBook(target, ms);
     }
     const from = leaf.angle;
-    const duration = reduceMotion.matches ? 0 : Math.max(180, (ms * Math.abs(to - from)) / 180);
+    const sweep = Math.abs(to - from);
+    const fullCircle = sweep > 180; // phones only
+    const duration = reduceMotion.matches ? 0 : Math.max(180, (ms * sweep) / (fullCircle ? 360 : 180));
+    // A full circle is slow while the page is on screen (near 0°) and quick once it's out of sight.
+    const ease = !fullCircle ? easeInOut : to < from ? easeIn : easeOut;
     const start = performance.now();
 
     const step = (now) => {
       const t = duration ? Math.min(1, (now - start) / duration) : 1;
-      setAngle(leaf, from + (to - from) * easeInOut(t));
+      setAngle(leaf, from + (to - from) * ease(t));
       castShadow(leaf);
       if (t < 1) {
         requestAnimationFrame(step);
@@ -211,7 +229,7 @@
     }
     hideHint();
     const leaf = dir > 0 ? leaves[flipped] : leaves[flipped - 1];
-    animate(leaf, dir > 0 ? -180 : 0, ms, dir);
+    animate(leaf, dir > 0 ? turnedAngle() : 0, ms, dir);
   }
 
   function goToPage(index) {
@@ -219,7 +237,9 @@
     if (busy || target === flipped) return;
     const dir = Math.sign(target - flipped);
     const steps = Math.abs(target - flipped);
-    for (let i = 0; i < steps; i++) turn(dir, steps > 1 ? QUICK_FLIP_MS : FLIP_MS);
+    const ms = steps > 1 ? QUICK_FLIP_MS : FLIP_MS;
+    queue = Array.from({ length: steps - 1 }, () => ({ dir, ms }));
+    turn(dir, ms);
   }
 
   // Little "nope" wiggle at either end of the booklet.
@@ -313,6 +333,8 @@
       busy = true;
       book.classList.add('is-dragging');
       restack(drag.leaf);
+      // on a phone, bring the page round from behind the book to where it can be dragged in
+      if (drag.dir < 0 && mode === 'single') setAngle(drag.leaf, -180);
       markVisible(flipped + drag.dir, true); // pages peeking out from under the drag
       hideHint();
     }
@@ -346,8 +368,8 @@
     const quick = performance.now() - d.t < 320 && d.p > 0.06;
     const done = !cancelled && (d.p > 0.45 || quick);
     busy = false;
-    if (done) animate(d.leaf, d.dir > 0 ? -180 : 0, FLIP_MS * 0.8, d.dir);
-    else animate(d.leaf, d.dir > 0 ? 0 : -180, FLIP_MS * 0.6, 0);
+    if (done) animate(d.leaf, d.dir > 0 ? turnedAngle() : 0, FLIP_MS * 0.8, d.dir);
+    else animate(d.leaf, d.dir > 0 ? 0 : turnedAngle(), FLIP_MS * 0.6, 0);
   }
 
   window.addEventListener('pointerup', (e) => endDrag(e, false));
