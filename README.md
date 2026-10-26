@@ -36,6 +36,16 @@ If you host it somewhere else, update the `og:url` / `og:image` links in `index.
 The QR code on the tag page opens `https://abdulrahman-47.github.io/card/`. Tapping it shares the link. It's stored in
 `assets/js/qr-data.js` and drawn in the booklet's colors by `assets/js/booklet.js`.
 
+## Presentation (`presentation/`)
+
+An Arabic presentation for Loopie built on the same flip-through booklet, opening right-to-left like an Arabic book:
+cover → logo → brand introduction → products → pricing policy (cost elements, profit percentage, formulas) →
+worked example (580 + 20% = 696 EGP) → sold online with the QR page → thank-you back cover.
+
+Once GitHub Pages is on it lives at `https://abdulrahman-47.github.io/card/presentation/`.
+To present: press **F** (or the corner button) for full screen, then use the arrow keys, Page Up/Down (most clickers),
+or Space. The controls and cursor hide while the mouse is still. All the text is in `presentation/index.html`.
+
 ## Images
 
 `assets/images/` holds the pictures used by the pages. The cut-out photos (`mannequin-*.jpg`, `closeup.jpg`) and the
@@ -59,3 +69,4 @@ python3 tools/make_assets.py
 - **تعديل الكلام:** كله في `index.html`.
 - **السعر:** في `index.html` (الرقم 690).
 - **الـ QR code:** بيفتح رابط الكتيّب. لو عايز تغير الرابط، عدّل `QR_URL` في `tools/make_qr.py` وشغّل `python3 tools/make_qr.py`.
+- **البريزنتيشن:** على `https://abdulrahman-47.github.io/card/presentation/`. دوس **F** عشان ملء الشاشة، وقلّب بالأسهم أو Page Up/Down أو المسطرة. الكلام كله في `presentation/index.html`.

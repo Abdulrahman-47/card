@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Loopie · لفة صغيرة من الحب</title>
+  <meta name="description" content="عرض تقديمي لبراند Loopie: تعريف البراند، المنتجات، وسياسة التسعير." />
+  <meta name="theme-color" content="#2a0a10" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%B6%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Caveat:wght@600;700&family=Cormorant+Garamond:wght@600;700&family=Dancing+Script:wght@600;700&family=El+Messiri:wght@400;500;600;700&family=Jost:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="deck.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="deck">
+  <canvas class="sky" id="sky" aria-hidden="true"></canvas>
+
+  <div class="app">
+    <header class="topbar">
+      <p class="brand"><span class="brand__heart" aria-hidden="true">♡</span> Loopie</p>
+      <div class="topbar__actions">
+        <button class="icon-btn" id="fsBtn" type="button" aria-label="عرض بملء الشاشة" title="ملء الشاشة (F)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="stage" id="stage">
+      <div class="book" id="book" aria-roledescription="كتيّب" aria-label="عرض Loopie">
+        <div class="book__shadow" aria-hidden="true"></div>
+        <div class="cast cast--left" aria-hidden="true"></div>
+        <div class="cast cast--right" aria-hidden="true"></div>
+
+        <!-- 1 · الغلاف -->
+        <article class="page page--cover" data-title="الغلاف">
+          <img class="cover__art" src="../assets/images/cover.jpg" alt="Tale as Old as Time: وردة حمرا تحت قبة إزاز في برواز دهبي" />
+          <div class="cover__shine" aria-hidden="true"></div>
+        </article>
+
+        <!-- 2 · اللوجو -->
+        <article class="page page--paper d-logo" data-title="Loopie">
+          <div class="d-flow">
+            <p class="d-logo__name reveal rise">Loopie</p>
+            <div class="d-logo__badge reveal spin" style="--d: .15s">
+              <img src="images/logo.jpg" alt="لوجو Loopie: بنت لابسة طاقية بودان دبدوب وملفوفة في شال وبتشتغل تريكو، وفوقها A Little Loop of Love" />
+            </div>
+            <p class="d-logo__tag reveal rise" style="--d: .55s">لفة صغيرة من الحب <span class="heart" aria-hidden="true">♡</span></p>
+          </div>
+          <img class="sticker d-logo__ball reveal pop" style="--d: .8s" src="../assets/images/sticker-ball.webp" alt="" />
+        </article>
+
+        <!-- 3 · تعريف البراند -->
+        <article class="page page--paper" data-title="أهلًا بيكي">
+          <div class="d-flow">
+            <h2 class="d-title reveal rise">أهلًا بيكي في <span class="d-latin">Loopie</span></h2>
+            <p class="d-sub reveal rise" style="--d: .1s">لفة صغيرة من الحب ♡</p>
+            <div class="d-body">
+              <p class="reveal rise" style="--d: .25s">إحنا في <b>Loopie</b> مؤمنين إن الحاجات الصغيرة ممكن تعمل أكبر فرحة، وعشان كده بنحوّل الخيوط البسيطة لقطع <b>هاند ميد</b> جميلة، معمولة بعناية وإبداع و<b>حب كبييير!</b></p>
+              <p class="reveal rise" style="--d: .4s">من الشالات الدافية اللي تحسسك إنك في حضن دافي، لقطع مميزة بتضيف لمسة خاصة ليومك، كل قطعة ليها سحرها وحكايتها.</p>
+            </div>
+          </div>
+          <img class="sticker d-s-bear reveal pop" style="--d: .7s" src="../assets/images/sticker-bear.webp" alt="" />
+        </article>
+
+        <!-- 4 · حكايتنا -->
+        <article class="page page--paper" data-title="حكايتنا">
+          <div class="d-flow">
+            <h2 class="d-title reveal rise">حكايتنا <span class="heart" aria-hidden="true">♡</span></h2>
+            <div class="d-body">
+              <p class="reveal rise" style="--d: .15s">إحنا بنحب فكرة إن الحاجة اللي بتتعمل بالإيد بيبقى فيها جزء صغير من روح الشخص اللي عملها، ونتمنى إن كل قطعة من <b>Loopie</b> توصلك الدفا والسعادة وسبب جديد للابتسامة.</p>
+              <p class="reveal rise" style="--d: .3s">سواء بتدوري على حاجة تدفيكي، أو أكسسوار كيوت يكمّل لبسك، أو هدية هاند ميد مميزة لحد بتحبيه، <b>إنتِ في المكان الصح!</b></p>
+            </div>
+            <blockquote class="d-quote reveal pop" style="--d: .5s">كل حاجة بنعملها بحب، غرزة ورا غرزة، مخصوص ليكي ♡</blockquote>
+            <p class="d-slogan reveal rise" style="--d: .7s"><span class="d-latin">Loopie</span> — أحضان هاند ميد، مخصوص ليكي</p>
+          </div>
+          <img class="sticker d-s-girl reveal pop" style="--d: .9s" src="../assets/images/sticker-girl.webp" alt="" />
+        </article>
+
+        <!-- 5 · منتجاتنا -->
+        <article class="page page--paper" data-title="منتجاتنا">
+          <div class="d-flow">
+            <h2 class="d-title reveal rise">منتجاتنا <span class="heart" aria-hidden="true">♡</span></h2>
+            <p class="d-sub reveal rise" style="--d: .1s">شال بكابيشون وودان دبدوب، هاند ميد بالكامل</p>
+            <figure class="photo d-products reveal drop" style="--rot: -2deg; --d: .2s">
+              <span class="tape" aria-hidden="true"></span>
+              <img src="images/products.jpg" alt="الشال النبيتي بالكابيشون وودان الدبدوب الكريمي على مانيكان من قدام ومن ورا، وصور قريبة للودان والخيط" />
+            </figure>
+            <ul class="d-chips">
+              <li class="reveal pop" style="--d: .55s">ودان دبدوب كيوت</li>
+              <li class="reveal pop" style="--d: .65s">خيط ناعم ودافي</li>
+              <li class="reveal pop" style="--d: .75s">طويل يلفّك ويحضنك</li>
+            </ul>
+          </div>
+          <img class="sticker d-s-yarn reveal pop" style="--d: .9s" src="../assets/images/sticker-yarn.webp" alt="" />
+        </article>
+
+        <!-- 6 · سياسة التسعير -->
+        <article class="page page--paper" data-title="سياسة التسعير">
+          <div class="d-flow">
+            <span class="d-num reveal pop">1</span>
+            <h2 class="d-title reveal rise" style="--d: .1s">سياسة التسعير في <span class="d-latin">Loopie</span></h2>
+            <p class="d-lead reveal rise" style="--d: .2s">تعتمد <b>Loopie</b> على أسس محاسبية واضحة لتحديد أسعار منتجات الهاند ميد، بهدف تغطية تكاليف الإنتاج وتحقيق ربح مناسب يضمن استمرارية البراند وتطوير منتجاته.</p>
+            <p class="d-label reveal rise" style="--d: .35s">أهدافنا من التسعير</p>
+            <div class="d-goals">
+              <div class="d-goal reveal pop" style="--d: .45s">
+                <span class="d-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="2.8" /><path d="M5 6v4c0 1.6 3.1 2.8 7 2.8s7-1.2 7-2.8V6M5 10v4c0 1.6 3.1 2.8 7 2.8s7-1.2 7-2.8v-4M5 14v4c0 1.6 3.1 2.8 7 2.8s7-1.2 7-2.8v-4" /></svg></span>
+                <b>تغطية تكاليف الإنتاج</b>
+              </div>
+              <div class="d-goal reveal pop" style="--d: .6s">
+                <span class="d-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16M5.5 15.5l4.5-4.5 3 3 6-6.5M14.5 7.5H19V12" /></svg></span>
+                <b>تحقيق ربح مناسب</b>
+              </div>
+              <div class="d-goal reveal pop" style="--d: .75s">
+                <span class="d-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-9M12 12c0-4.2 3-6.5 7.5-6.5 0 4.2-3 6.5-7.5 6.5ZM12 14.5c0-3.4-2.6-5.5-6.5-5.5 0 3.4 2.6 5.5 6.5 5.5Z" /></svg></span>
+                <b>استمرارية البراند وتطويره</b>
+              </div>
+            </div>
+          </div>
+          <img class="sticker d-s-yarn reveal pop" style="--d: .95s" src="../assets/images/sticker-yarn.webp" alt="" />
+        </article>
+
+        <!-- 7 · عناصر التكلفة -->
+        <article class="page page--paper" data-title="عناصر التكلفة">
+          <div class="d-flow">
+            <span class="d-num reveal pop">2</span>
+            <h2 class="d-title reveal rise" style="--d: .1s">عناصر حساب تكلفة المنتج</h2>
+            <p class="d-label reveal rise" style="--d: .2s">بنحسب التكلفة الكاملة للمنتج بجمع العناصر دي:</p>
+            <ol class="d-costs">
+              <li class="d-cost reveal rise" style="--d: .3s">
+                <span class="d-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" /><path d="M5.5 8.5c4.5.5 8.8 3.6 11 8.6M4.3 13.4c4-.8 8 .9 10.6 5.4M9.2 4.5c2.6 3.2 3.3 8.6 1.4 14.6M17 6c-3.4.6-6.7 3.8-8 8.6" /></svg></span>
+                <div><b>تكلفة الخامات</b><span>الخيوط والإكسسوارات والليبل والتغليف.</span></div>
+              </li>
+              <li class="d-cost reveal rise" style="--d: .45s">
+                <span class="d-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" /><path d="M12 7.5V12l3 2" /></svg></span>
+                <div><b>تكلفة العمالة</b><span>الوقت والمجهود المبذول في تصنيع القطعة.</span></div>
+              </li>
+              <li class="d-cost reveal rise" style="--d: .6s">
+                <span class="d-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.1v.1h5v-.1c0-.8.4-1.6 1.1-2.1A6 6 0 0 0 12 3Z" /></svg></span>
+                <div><b>المصروفات غير المباشرة</b><span>الكهرباء والأدوات واستهلاك المعدات.</span></div>
+              </li>
+              <li class="d-cost reveal rise" style="--d: .75s">
+                <span class="d-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M3 10h18M7 14.5h4" /></svg></span>
+                <div><b>المصروفات الإضافية</b><span>عمولات البيع والدفع وأي تكاليف أخرى يتحملها البراند.</span></div>
+              </li>
+            </ol>
+            <p class="d-total reveal pop" style="--d: .95s">= التكلفة الكاملة للمنتج</p>
+          </div>
+        </article>
+
+        <!-- 8 · نسبة الربح -->
+        <article class="page page--paper" data-title="نسبة الربح">
+          <div class="d-flow">
+            <span class="d-num reveal pop">3</span>
+            <h2 class="d-title reveal rise" style="--d: .1s">تحديد نسبة الربح</h2>
+            <p class="d-lead reveal rise" style="--d: .2s">بعد حساب التكلفة الكاملة للمنتج، يتم تحديد نسبة الربح المستهدفة وفقًا لطبيعة المنتج وظروف السوق والمنافسة.</p>
+            <div class="d-range reveal rise" style="--d: .35s">
+              <p class="d-range__label">النسبة الاسترشادية للزيادة على التكلفة</p>
+              <p class="d-range__big" dir="ltr">20% – 30%</p>
+              <div class="d-range__track" dir="ltr"><span class="d-range__band"></span></div>
+              <div class="d-range__ticks" dir="ltr"><span>0%</span><span>10%</span><span>20%</span><span>30%</span><span>40%</span><span>50%</span></div>
+              <p class="d-note">✦ يمكن تعديل النسبة حسب نوع المنتج ودرجة تعقيد تنفيذه والطلب عليه.</p>
+            </div>
+            <div class="d-warn reveal pop" style="--d: .7s">
+              <p><b>مهم:</b> يجب التمييز بين نسبة الزيادة على التكلفة وهامش الربح من سعر البيع.</p>
+              <div class="d-warn__cols">
+                <div><span>الزيادة على التكلفة</span><b dir="ltr">116 ÷ 580 = 20%</b></div>
+                <div><span>هامش الربح من سعر البيع</span><b dir="ltr">116 ÷ 696 ≈ 16.7%</b></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 9 · معادلات السعر -->
+        <article class="page page--paper" data-title="معادلات السعر">
+          <div class="d-flow">
+            <span class="d-num reveal pop">4</span>
+            <h2 class="d-title reveal rise" style="--d: .1s">معادلات حساب سعر البيع</h2>
+            <div class="d-formula reveal rise" style="--d: .25s">
+              <p class="d-formula__step">أولًا: حساب قيمة الربح</p>
+              <div class="d-eq">
+                <span class="d-chip d-chip--result">قيمة الربح</span><i>=</i>
+                <span class="d-eq__rhs"><span class="d-chip">التكلفة الكاملة</span><i>×</i><span class="d-chip">نسبة الربح</span></span>
+              </div>
+            </div>
+            <div class="d-formula reveal rise" style="--d: .5s">
+              <p class="d-formula__step">ثانيًا: حساب سعر البيع</p>
+              <div class="d-eq">
+                <span class="d-chip d-chip--result">سعر البيع</span><i>=</i>
+                <span class="d-eq__rhs"><span class="d-chip">التكلفة الكاملة</span><i>+</i><span class="d-chip">قيمة الربح</span></span>
+              </div>
+            </div>
+            <p class="d-short reveal rise" style="--d: .75s"><b>يعني باختصار:</b> سعر البيع = التكلفة الكاملة × <span class="d-nowrap">(1 + نسبة الربح)</span></p>
+          </div>
+          <img class="sticker d-s-ball reveal pop" style="--d: .95s" src="../assets/images/sticker-ball.webp" alt="" />
+        </article>
+
+        <!-- 10 · مثال تطبيقي -->
+        <article class="page page--paper" data-title="مثال تطبيقي">
+          <div class="d-flow">
+            <h2 class="d-title reveal rise">مثال تطبيقي</h2>
+            <p class="d-sub reveal rise" style="--d: .1s">شال الكابيشون بودان الدبدوب</p>
+            <div class="d-rows">
+              <div class="d-row reveal rise" style="--d: .2s"><span>تكلفة القطعة</span><b><span data-count="580" data-delay="200">580</span> جنيه</b></div>
+              <div class="d-row reveal rise" style="--d: .35s"><span>نسبة الربح</span><b dir="ltr"><span data-count="20" data-delay="350">20</span>%</b></div>
+              <div class="d-row reveal rise" style="--d: .5s"><span>قيمة الربح <small dir="ltr">580 × 20%</small></span><b><span data-count="116" data-delay="500">116</span> جنيه</b></div>
+            </div>
+            <div class="d-price reveal pop" style="--d: .7s">
+              <span class="d-price__label">سعر البيع</span>
+              <span class="d-price__value"><span data-count="696" data-delay="750">696</span> <small>جنيه</small></span>
+              <span class="d-price__eq" dir="ltr">580 + 116 = 696</span>
+            </div>
+            <div class="d-stack reveal rise" style="--d: .9s">
+              <div class="d-stack__bar"><span class="d-stack__cost"></span><span class="d-stack__profit"></span></div>
+              <div class="d-stack__legend"><span><i class="is-cost"></i>التكلفة 580</span><span><i class="is-profit"></i>الربح 116</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 11 · البيع أونلاين -->
+        <article class="page page--paper" data-title="البيع أونلاين">
+          <div class="d-flow">
+            <span class="d-check reveal pop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>
+            <h2 class="d-title reveal rise" style="--d: .1s">عملية البيع تمت أونلاين</h2>
+            <p class="d-sub reveal rise" style="--d: .2s">من خلال الكتيّب الإلكتروني بتاع <b>Loopie</b></p>
+            <figure class="photo d-shot reveal drop" style="--rot: 2deg; --d: .3s">
+              <span class="tape tape--alt" aria-hidden="true"></span>
+              <img src="images/qr-page.jpg" alt="صفحة التاج في كتيّب Loopie وعليها QR code بيفتح الكتيّب" />
+            </figure>
+            <p class="d-link reveal rise" style="--d: .7s" dir="ltr">abdulrahman-47.github.io/card</p>
+          </div>
+          <p class="d-scribble reveal rise" style="--d: .9s">امسح الكود<br />وشوف الكتيّب ♡</p>
+        </article>
+
+        <!-- 12 · شكرًا -->
+        <article class="page page--back d-back" data-title="شكرًا">
+          <div class="back__frame">
+            <div class="d-back__logo"><img src="images/logo.jpg" alt="" /></div>
+            <h2 class="d-back__title">شكرًا ليكم <span aria-hidden="true">♡</span></h2>
+            <p class="d-back__slogan"><span class="d-latin">Loopie</span> — أحضان هاند ميد، مخصوص ليكي</p>
+            <button class="back__again" type="button" data-goto="0">من الأول <span aria-hidden="true">↺</span></button>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <nav class="controls" aria-label="صفحات العرض">
+      <button class="nav-btn" id="prevBtn" type="button" aria-label="الصفحة اللي فاتت">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7" /></svg>
+      </button>
+      <div class="progress">
+        <div class="dots" id="dots"></div>
+        <p class="counter" id="counter" aria-live="polite">الغلاف</p>
+      </div>
+      <button class="nav-btn" id="nextBtn" type="button" aria-label="الصفحة الجاية">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7" /></svg>
+      </button>
+    </nav>
+  </div>
+
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__ball"></div>
+    <p>بنلفّ الخيط…</p>
+  </div>
+
+  <script src="deck.js"></script>
+</body>
+</html>
