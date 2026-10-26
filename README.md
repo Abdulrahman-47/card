@@ -5,7 +5,7 @@ On a computer it opens like a real booklet (two pages side by side); on a phone 
 Swipe, drag a page corner, tap, or use the arrow keys to turn pages.
 
 **Pages:** cover (Tale as Old as Time) → a little letter → "A Little Yarn, A Lot of Love" + model photo →
-"Our arms are long enough to hug you!" + mannequin photos → the little details → tag with barcode →
+"Our arms are long enough to hug you!" + mannequin photos → the little details → tag with a QR code →
 "wrapped in love" + price (690 EGP, free delivery) → back cover.
 
 ## Run it locally
@@ -30,10 +30,11 @@ If you host it somewhere else, update the `og:url` / `og:image` links in `index.
 | --- | --- |
 | All the text on the pages | `index.html` (each page is an `<article class="page">`, in order) |
 | Price (`690`) | `index.html`: `data-value="690"` on `#priceNum` and the number inside it |
-| Barcode number | `assets/js/booklet.js`: `BARCODE_DIGITS` (12 digits; the check digit is added automatically) |
+| QR code link | `tools/make_qr.py`: change `QR_URL`, then run `python3 tools/make_qr.py` (needs `pip install segno`) |
 | Colors, fonts, layout | `assets/css/style.css` |
 
-The barcode is a valid-looking EAN-13 drawn in the browser, but it's a placeholder and doesn't point to anything.
+The QR code on the tag page opens `https://abdulrahman-47.github.io/card/`. Tapping it shares the link. It's stored in
+`assets/js/qr-data.js` and drawn in the booklet's colors by `assets/js/booklet.js`.
 
 ## Images
 
@@ -57,4 +58,4 @@ python3 tools/make_assets.py
   وبعد دقيقة هيبقى الرابط `https://abdulrahman-47.github.io/card/`.
 - **تعديل الكلام:** كله في `index.html`.
 - **السعر:** في `index.html` (الرقم 690).
-- **رقم الباركود:** في أول ملف `assets/js/booklet.js` (`BARCODE_DIGITS`). ده باركود وهمي.
+- **الـ QR code:** بيفتح رابط الكتيّب. لو عايز تغير الرابط، عدّل `QR_URL` في `tools/make_qr.py` وشغّل `python3 tools/make_qr.py`.

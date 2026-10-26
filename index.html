@@ -115,19 +115,21 @@
           <img class="sticker sticker--yarn reveal pop" style="--d: .85s" src="assets/images/sticker-yarn.webp" alt="" />
         </article>
 
-        <!-- 6 · The tag (barcode) -->
+        <!-- 6 · The tag (QR code to this booklet) -->
         <article class="page page--tag" data-title="Your little tag">
           <div class="tag-frame">
-            <img src="assets/images/barcode-frame.jpg" alt="" />
+            <img src="assets/images/tag-frame.jpg" alt="" />
             <div class="tag">
-              <p class="tag__kicker reveal rise">handmade</p>
+              <p class="tag__kicker reveal rise">scan me</p>
               <p class="tag__name reveal rise" style="--d: .1s">Bear Hood Scarf</p>
               <div class="tag__slot">
-                <div class="barcode" id="barcode" role="img" aria-label="Product barcode">
-                  <span class="barcode__laser" aria-hidden="true"></span>
-                </div>
+                <button class="qr" id="qr" type="button" aria-label="QR code that opens this booklet. Tap to share the link.">
+                  <span class="qr__frame" aria-hidden="true"></span>
+                  <span class="qr__scan" aria-hidden="true"></span>
+                </button>
               </div>
-              <p class="tag__scan reveal rise" style="--d: .9s">scan for a warm hug ♡</p>
+              <p class="tag__scan reveal rise" style="--d: 1.1s">scan or tap to share ♡</p>
+              <p class="tag__url reveal rise" id="qrUrl" style="--d: 1.2s">abdulrahman-47.github.io/card</p>
             </div>
           </div>
         </article>
@@ -183,6 +185,7 @@
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="assets/js/qr-data.js"></script>
   <script src="assets/js/booklet.js"></script>
 </body>
 </html>

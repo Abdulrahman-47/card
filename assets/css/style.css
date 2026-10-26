@@ -645,7 +645,7 @@ button { font: inherit; color: inherit; }
 
 .sticker--yarn { width: 29cqw; right: 8cqw; bottom: 6cqw; rotate: 6deg; }
 
-/* ---------- 6 · Tag + barcode ---------- */
+/* ---------- 6 · Tag + QR code ---------- */
 
 .page--tag { background: #f2e6d4; }
 
@@ -693,40 +693,82 @@ button { font: inherit; color: inherit; }
 }
 
 .tag__slot {
-  position: relative;
   flex: 1;
   width: 100%;
-  margin: 2.4cqw 0 2cqw;
-  container-type: size;
+  display: grid;
+  place-items: center;
 }
 
-.barcode {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 100cqh;
-  height: 82cqw;
-  translate: -50% -50%;
-  rotate: 90deg;
-  overflow: hidden;
+.qr {
+  position: relative;
+  width: 24.4cqw;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 1.4cqw;
+  background: none;
+  cursor: pointer;
+  transition: scale .2s;
 }
 
-.barcode svg { display: block; width: 100%; height: 100%; }
-.barcode .bar { fill: #2a1410; transform-box: fill-box; transform-origin: 50% 100%; }
-.barcode text { fill: #2a1410; font-family: var(--font-ui); font-size: 8.5px; font-weight: 500; }
+.qr:active { scale: .96; }
 
-.barcode__laser {
+.qr svg { display: block; width: 100%; height: 100%; }
+.qr__bg { fill: #fffdf8; }
+.qr__dot { fill: #5c1424; }
+.qr__eye-ring { fill: none; stroke: var(--wine); stroke-width: 1; }
+.qr__eye-dot { fill: #4a0f18; }
+.qr__badge circle { fill: #fffaf2; stroke: var(--rose); stroke-width: .35; }
+
+.qr__dot,
+.qr__eye,
+.qr__badge,
+.qr__badge image { transform-box: fill-box; transform-origin: center; }
+
+/* little viewfinder corners */
+.qr__frame {
+  --c: var(--rose);
+  --t: .45cqw;
+  --l: 3.6cqw;
   position: absolute;
-  left: -4%;
-  right: -4%;
-  top: 0;
-  height: 2px;
-  background: #ff3448;
-  box-shadow: 0 0 6px 2px rgba(255, 52, 72, .7), 0 0 16px 4px rgba(255, 52, 72, .35);
+  inset: -1.1cqw;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--c) 0 0) left top / var(--l) var(--t),
+    linear-gradient(var(--c) 0 0) left top / var(--t) var(--l),
+    linear-gradient(var(--c) 0 0) right top / var(--l) var(--t),
+    linear-gradient(var(--c) 0 0) right top / var(--t) var(--l),
+    linear-gradient(var(--c) 0 0) left bottom / var(--l) var(--t),
+    linear-gradient(var(--c) 0 0) left bottom / var(--t) var(--l),
+    linear-gradient(var(--c) 0 0) right bottom / var(--l) var(--t),
+    linear-gradient(var(--c) 0 0) right bottom / var(--t) var(--l);
+  background-repeat: no-repeat;
+}
+
+.page.is-visible .qr__frame { animation: breathe 2.6s 1.4s ease-in-out infinite; }
+
+.qr__scan {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  top: 2%;
+  height: 16%;
+  border-bottom: .35cqw solid rgba(217, 135, 140, .9);
+  background: linear-gradient(180deg, transparent, rgba(217, 135, 140, .22));
+  box-shadow: 0 .6cqw 1.4cqw -.6cqw rgba(217, 135, 140, .8);
   opacity: 0;
+  pointer-events: none;
 }
 
-.page.is-visible .barcode__laser { animation: laser 2.4s 1.1s ease-in-out infinite; }
+.page.is-visible .qr__scan { animation: qr-scan 3s 1.6s ease-in-out infinite; }
+
+.tag__url {
+  margin: .9cqw 0 0;
+  font-family: var(--font-ui);
+  font-size: 1.75cqw;
+  letter-spacing: .04em;
+  color: var(--ink-soft);
+}
 
 .tag__scan {
   margin: 0;
@@ -938,7 +980,14 @@ button { font: inherit; color: inherit; }
 .js .page.is-visible .reveal.drop { animation: drop .9s var(--d, 0s) cubic-bezier(.2, .9, .25, 1.15) both; }
 .js .page.is-visible .reveal.pop { animation: pop .75s var(--d, 0s) cubic-bezier(.34, 1.56, .64, 1) both, sway 5s calc(var(--d, 0s) + .8s) ease-in-out infinite; }
 
-.js .page.is-visible .barcode .bar { animation: bar-in .5s calc(.35s + var(--i) * 14ms) cubic-bezier(.2, .8, .2, 1) both; }
+.js .page .qr__dot,
+.js .page .qr__eye,
+.js .page .qr__badge { transform: scale(0); }
+
+.js .page.is-visible .qr__dot,
+.js .page.is-visible .qr__eye { animation: qr-pop .5s var(--d, 0s) cubic-bezier(.34, 1.56, .64, 1) forwards; }
+.js .page.is-visible .qr__badge { animation: qr-pop .7s 1s cubic-bezier(.34, 1.56, .64, 1) forwards; }
+.js .page.is-visible .qr__badge image { animation: qr-beat 2.4s 1.8s ease-in-out infinite; }
 
 @keyframes rise {
   from { opacity: 0; translate: 0 3cqw; }
@@ -960,17 +1009,29 @@ button { font: inherit; color: inherit; }
   50% { translate: 0 -1cqw; }
 }
 
-@keyframes bar-in {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
+@keyframes qr-pop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
 }
 
-@keyframes laser {
-  0% { top: 4%; opacity: 0; }
-  10% { opacity: 1; }
-  50% { top: 70%; opacity: 1; }
-  60% { opacity: 1; }
-  100% { top: 4%; opacity: 0; }
+@keyframes qr-beat {
+  0%, 100% { transform: scale(1); }
+  12% { transform: scale(1.12); }
+  24% { transform: scale(1); }
+  36% { transform: scale(1.08); }
+  48% { transform: scale(1); }
+}
+
+@keyframes qr-scan {
+  0% { top: 2%; opacity: 0; }
+  12% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 82%; opacity: 0; }
+}
+
+@keyframes breathe {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.04; }
 }
 
 @keyframes wiggle {

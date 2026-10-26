@@ -8,10 +8,6 @@
 (() => {
   'use strict';
 
-  // Fake barcode (EAN-13). Change these 12 digits to use your own; the 13th
-  // (check) digit is calculated automatically.
-  const BARCODE_DIGITS = '622069020261';
-
   const RATIO = 3 / 4;        // page width / page height
   const MAX_PAGE_W = 560;     // px, so pages don't get huge on big monitors
   const FLIP_MS = 1100;       // one full page turn
@@ -442,47 +438,42 @@
     }
   }
 
-  // EAN-13 barcode drawn as SVG.
-  function drawBarcode(el, digits12) {
-    const L = ['0001101', '0011001', '0010011', '0111101', '0100011', '0110001', '0101111', '0111011', '0110111', '0001011'];
-    const R = L.map((c) => c.replace(/./g, (b) => (b === '1' ? '0' : '1')));
-    const G = R.map((c) => c.split('').reverse().join(''));
-    const PARITY = ['LLLLLL', 'LLGLGG', 'LLGGLG', 'LLGGGL', 'LGLLGG', 'LGGLLG', 'LGGGLL', 'LGLGLG', 'LGLGGL', 'LGGLGL'];
+  // QR code (data from tools/make_qr.py) drawn as SVG in the booklet's colors.
+  function drawQR(el, data) {
+    const rows = data.rows;
+    const n = rows.length;
+    const q = 2;            // quiet zone around the code, in modules
+    const mid = n / 2;
+    const badgeR = 4.9;     // yarn-ball badge; level-H error correction covers it
+    const size = n + q * 2;
+    const c = mid + q;
+    const isEye = (x, y) => (x < 7 || x >= n - 7) && (y < 7 || y >= n - 7) && !(x >= n - 7 && y >= n - 7);
 
-    const d = digits12.replace(/\D/g, '').padEnd(12, '0').slice(0, 12).split('').map(Number);
-    const sum = d.reduce((s, v, i) => s + v * (i % 2 ? 3 : 1), 0);
-    d.push((10 - (sum % 10)) % 10);
-
-    let bits = '101';
-    for (let i = 1; i <= 6; i++) bits += (PARITY[d[0]][i - 1] === 'L' ? L : G)[d[i]];
-    bits += '01010';
-    for (let i = 7; i <= 12; i++) bits += R[d[i]];
-    bits += '101';
-
-    const quiet = 9;
-    const width = 95 + quiet + 5;
-    const barH = 58;
-    const guards = new Set([0, 1, 2, 45, 46, 47, 48, 49, 92, 93, 94]);
-    let rects = '';
-    let n = 0;
-    for (let i = 0; i < bits.length; i++) {
-      if (bits[i] !== '1') continue;
-      let j = i;
-      while (bits[j + 1] === '1') j++;
-      const h = guards.has(i) ? barH + 6 : barH;
-      rects += `<rect class="bar" style="--i:${n++}" x="${quiet + i}" y="2" width="${j - i + 1}" height="${h}"/>`;
-      i = j;
+    let dots = '';
+    for (let y = 0; y < n; y++) {
+      for (let x = 0; x < n; x++) {
+        if (rows[y][x] !== '1' || isEye(x, y)) continue;
+        const d = Math.hypot(x + 0.5 - mid, y + 0.5 - mid);
+        if (d < badgeR + 0.4) continue;
+        const delay = (0.3 + (d / mid) * 0.6).toFixed(2); // ripples out from the middle
+        dots += `<rect class="qr__dot" style="--d:${delay}s" x="${x + q + 0.04}" y="${y + q + 0.04}" width=".92" height=".92" rx=".32"/>`;
+      }
     }
-    const y = barH + 10.5;
-    let text = `<text x="${quiet - 6}" y="${y}">${d[0]}</text>`;
-    for (let i = 1; i <= 6; i++) text += `<text x="${quiet + 3 + (i - 1) * 7 + 0.6}" y="${y}">${d[i]}</text>`;
-    for (let i = 7; i <= 12; i++) text += `<text x="${quiet + 50 + (i - 7) * 7 + 0.6}" y="${y}">${d[i]}</text>`;
+    const eye = (x, y, i) =>
+      `<g class="qr__eye" style="--d:${0.2 + i * 0.12}s">` +
+      `<rect class="qr__eye-ring" x="${x + q + 0.5}" y="${y + q + 0.5}" width="6" height="6" rx="1.9"/>` +
+      `<rect class="qr__eye-dot" x="${x + q + 2}" y="${y + q + 2}" width="3" height="3" rx="1"/></g>`;
 
     el.insertAdjacentHTML(
       'afterbegin',
-      `<svg viewBox="0 0 ${width} ${barH + 13}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${rects}${text}</svg>`
+      `<svg viewBox="0 0 ${size} ${size}" aria-hidden="true">` +
+        `<rect class="qr__bg" width="${size}" height="${size}" rx="2.4"/>` +
+        dots + eye(0, 0, 0) + eye(n - 7, 0, 1) + eye(0, n - 7, 2) +
+        `<g class="qr__badge"><circle cx="${c}" cy="${c}" r="${badgeR - 0.3}"/>` +
+        `<image href="assets/images/sticker-ball.webp" x="${c - 3.6}" y="${c - 2.95}" width="7.2" height="5.9"/></g>` +
+        `</svg>`
     );
-    el.setAttribute('aria-label', `Product barcode ${d.join('')}`);
+    $('#qrUrl').textContent = data.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
   }
 
   async function share() {
@@ -614,7 +605,8 @@
 
   /* ---------------------------------------------------------------- start */
 
-  drawBarcode($('#barcode'), BARCODE_DIGITS);
+  if (window.BOOKLET_QR) drawQR($('#qr'), window.BOOKLET_QR);
+  $('#qr').addEventListener('click', share);
   $('#shareBtn').addEventListener('click', share);
   setupFullscreen();
   layout();
