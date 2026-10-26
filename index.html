@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>A Little Yarn, A Lot of Love</title>
+  <meta name="description" content="A tiny handmade booklet: meet the burgundy bear-ear hood scarf, made stitch by stitch with a whole lot of love. 690 EGP with free delivery." />
+  <meta name="theme-color" content="#2a0a10" />
+  <meta property="og:title" content="A Little Yarn, A Lot of Love ♡" />
+  <meta property="og:description" content="Meet your new favorite cuddle buddy. Handmade bear-ear hood scarf, 690 EGP, free delivery." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://abdulrahman-47.github.io/card/" />
+  <meta property="og:image" content="https://abdulrahman-47.github.io/card/assets/images/cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%B6%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Dancing+Script:wght@600;700&family=Jost:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <canvas class="sky" id="sky" aria-hidden="true"></canvas>
+
+  <div class="app">
+    <header class="topbar">
+      <p class="brand"><span class="brand__heart" aria-hidden="true">♡</span> A Little Yarn</p>
+      <div class="topbar__actions">
+        <button class="icon-btn" id="shareBtn" type="button" aria-label="Share this booklet" title="Share">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 13v5.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V13" /></svg>
+        </button>
+        <button class="icon-btn" id="fsBtn" type="button" aria-label="Full screen" title="Full screen">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="stage" id="stage">
+      <div class="book" id="book" aria-roledescription="booklet" aria-label="A Little Yarn, A Lot of Love booklet">
+        <div class="book__shadow" aria-hidden="true"></div>
+        <div class="cast cast--left" aria-hidden="true"></div>
+        <div class="cast cast--right" aria-hidden="true"></div>
+
+        <!-- 1 · Cover -->
+        <article class="page page--cover" data-title="Cover">
+          <img class="cover__art" src="assets/images/cover.jpg" alt="Tale as Old as Time: a red rose under a glass dome in a vintage golden frame" />
+          <div class="cover__shine" aria-hidden="true"></div>
+        </article>
+
+        <!-- 2 · A little letter -->
+        <article class="page page--paper page--letter" data-title="A little letter">
+          <div class="letter">
+            <p class="letter__kicker reveal rise">Once upon a winter…</p>
+            <h2 class="letter__hello reveal rise" style="--d: .1s">Dear you,</h2>
+            <p class="reveal rise" style="--d: .2s">This is a tale as old as time: chilly evenings, warm tea, and the cozy things we make for the ones we love.</p>
+            <p class="reveal rise" style="--d: .3s">Every loop here was made by hand, stitch by stitch, with patience and a whole lot of heart.</p>
+            <p class="reveal rise" style="--d: .4s">Turn the page and meet your new favorite cuddle buddy.</p>
+            <p class="letter__sign reveal rise" style="--d: .55s">With love <span aria-hidden="true">♡</span></p>
+          </div>
+          <img class="sticker sticker--ball reveal pop" style="--d: .7s" src="assets/images/sticker-ball.webp" alt="" />
+        </article>
+
+        <!-- 3 · Meet the scarf -->
+        <article class="page page--paper page--meet" data-title="Meet your cuddle buddy">
+          <h2 class="p-title reveal rise">A Little Yarn,<br />A Lot of Love <span class="heart" aria-hidden="true">♡</span></h2>
+          <figure class="photo photo--model reveal drop" style="--rot: -3deg; --d: .15s">
+            <span class="tape" aria-hidden="true"></span>
+            <img src="assets/images/model.jpg" alt="A girl wearing the burgundy hooded scarf with cream bear-ear pom-poms" />
+          </figure>
+          <div class="meet__text">
+            <p class="lead reveal rise" style="--d: .3s">Meet your new favorite cuddle buddy!</p>
+            <p class="reveal rise" style="--d: .4s">Made stitch by stitch with soft, cozy yarn and a whole lot of love.</p>
+            <p class="reveal rise" style="--d: .5s">Handmade to keep you warm and stay by your side every winter. <span class="heart" aria-hidden="true">♡</span></p>
+          </div>
+          <img class="sticker sticker--bear reveal pop" style="--d: .75s" src="assets/images/sticker-bear.webp" alt="" />
+        </article>
+
+        <!-- 4 · Big hugs -->
+        <article class="page page--paper page--hug" data-title="Big hugs">
+          <h2 class="p-title reveal rise">Our arms are long<br />enough to hug you! <span class="heart" aria-hidden="true">♡</span></h2>
+          <figure class="photo photo--front reveal drop" style="--rot: -4deg; --d: .15s">
+            <span class="tape" aria-hidden="true"></span>
+            <img src="assets/images/mannequin-front.jpg" alt="The hood scarf on a mannequin, front view, wrapped once around the neck" />
+            <figcaption>front ♡</figcaption>
+          </figure>
+          <figure class="photo photo--back reveal drop" style="--rot: 3.5deg; --d: .3s">
+            <span class="tape tape--alt" aria-hidden="true"></span>
+            <img src="assets/images/mannequin-back.jpg" alt="The hood scarf on a mannequin, back view, showing the bear-ear pom-poms" />
+            <figcaption>back ♡</figcaption>
+          </figure>
+          <img class="sticker sticker--girl reveal pop" style="--d: .6s" src="assets/images/sticker-girl.webp" alt="" />
+          <p class="scribble reveal rise" style="--d: .8s">wrap it, tie it, hug it!</p>
+        </article>
+
+        <!-- 5 · The little details -->
+        <article class="page page--paper page--details" data-title="The little details">
+          <h2 class="p-title reveal rise">The Little Details</h2>
+          <p class="scribble scribble--ears reveal rise" style="--d: .45s">look at those<br />little bear ears!
+            <svg class="scribble__arrow" viewBox="0 0 60 30" aria-hidden="true"><path d="M3 22c14-14 32-18 50-10M45 5l9 7-11 4" /></svg>
+          </p>
+          <figure class="photo photo--closeup reveal drop" style="--rot: 3deg; --d: .15s">
+            <span class="tape" aria-hidden="true"></span>
+            <img src="assets/images/closeup.jpg" alt="Close-up of a cream pom-pom ear on the plush burgundy hood" />
+          </figure>
+          <ul class="features">
+            <li class="reveal rise" style="--d: .3s"><b>Bear-ear pom-poms</b>, because cute matters</li>
+            <li class="reveal rise" style="--d: .4s"><b>A cozy hood</b> that keeps your ears warm</li>
+            <li class="reveal rise" style="--d: .5s"><b>Extra-long ends</b> to wrap, tie &amp; hug</li>
+            <li class="reveal rise" style="--d: .6s"><b>Plush, velvety yarn</b>, soft as a cloud</li>
+          </ul>
+          <div class="care reveal rise" style="--d: .7s">
+            <h3>Love it longer</h3>
+            <p>Hand wash cold · Lay flat to dry<br />Cuddle often <span aria-hidden="true">♡</span></p>
+          </div>
+          <img class="sticker sticker--yarn reveal pop" style="--d: .85s" src="assets/images/sticker-yarn.webp" alt="" />
+        </article>
+
+        <!-- 6 · The tag (barcode) -->
+        <article class="page page--tag" data-title="Your little tag">
+          <div class="tag-frame">
+            <img src="assets/images/barcode-frame.jpg" alt="" />
+            <div class="tag">
+              <p class="tag__kicker reveal rise">handmade</p>
+              <p class="tag__name reveal rise" style="--d: .1s">Bear Hood Scarf</p>
+              <div class="tag__slot">
+                <div class="barcode" id="barcode" role="img" aria-label="Product barcode">
+                  <span class="barcode__laser" aria-hidden="true"></span>
+                </div>
+              </div>
+              <p class="tag__scan reveal rise" style="--d: .9s">scan for a warm hug ♡</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7 · Wrapped in love + price -->
+        <article class="page page--end" data-title="Price &amp; delivery">
+          <p class="end__ever reveal rise">…and they stayed warm, happily ever after.</p>
+          <img class="end__art" src="assets/images/wrapped-in-love.jpg" alt="Two smiling yarn balls hugging: Because you deserve to be wrapped in love" />
+          <div class="price reveal rise" style="--d: .25s">
+            <p class="price__tag"><span class="price__label">only</span> <span class="price__num" id="priceNum" data-value="690">690</span> <span class="price__cur">EGP</span></p>
+            <p class="price__ship">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3.2v2.8h-7" /><circle cx="6.5" cy="17" r="1.8" /><circle cx="17" cy="17" r="1.8" /></svg>
+              Free delivery to your door
+            </p>
+          </div>
+          <div class="hearts" id="hearts" aria-hidden="true"></div>
+        </article>
+
+        <!-- 8 · Back cover -->
+        <article class="page page--back" data-title="Back cover">
+          <div class="back__frame">
+            <svg class="back__emblem" viewBox="0 0 96 72" aria-hidden="true">
+              <circle class="back__ball" cx="30" cy="42" r="19" />
+              <path class="back__wrap" d="M15 31c8-4 22-3 32 6M12 42c10-7 26-6 36 4M16 54c8-6 20-6 28 0M24 25c9 7 12 21 7 35M35 24c-6 9-6 24 2 36" />
+              <path class="back__strand" d="M49 46c8 4 14-2 18-8 3-4 7-6 10-11M77 27c-7-6-14-1-12 5-4-5-12-2-10 5 1 6 9 10 13 13 5-4 13-10 9-23" />
+            </svg>
+            <p class="back__kicker">made by hand · given with love</p>
+            <h2 class="back__title">Thank you for reading<br />our little book</h2>
+            <button class="back__again" type="button" data-goto="0">Read it again <span aria-hidden="true">↺</span></button>
+          </div>
+        </article>
+      </div>
+
+    </main>
+
+    <nav class="controls" aria-label="Booklet pages">
+      <button class="nav-btn" id="prevBtn" type="button" aria-label="Previous page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7" /></svg>
+      </button>
+      <div class="progress">
+        <div class="dots" id="dots"></div>
+        <p class="counter" id="counter" aria-live="polite">Cover</p>
+      </div>
+      <button class="nav-btn" id="nextBtn" type="button" aria-label="Next page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7" /></svg>
+      </button>
+    </nav>
+  </div>
+
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__ball"></div>
+    <p>winding the yarn…</p>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/booklet.js"></script>
+</body>
+</html>
